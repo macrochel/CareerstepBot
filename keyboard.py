@@ -11,7 +11,9 @@ def menu():
 	return menu_keyboard
 
 def contacts():
-	contacts_keyboard = types.InlineKeyboardMarkup(row_width=3, resize_keyboard=True)
-	button1 = types.InlineKeyboardButton('Алматы', callback_data='Almaty')
-	button2 = types.InlineKeyboardButton('Астана', callback_data='Astana')
-	button3 = types.InlineKeyboardButton('Шымкент', callback_data='Shymkent')
+	contacts_keyboard = types.InlineKeyboardMarkup(row_width=3)
+	button1 = types.InlineKeyboardButton('🍎Алматы', callback_data='Almaty')
+	button2 = types.InlineKeyboardButton('💨Астана', callback_data='Astana')
+	button3 = types.InlineKeyboardButton('☀️Караганда.', callback_data='Karaganda')
+	contacts_keyboard.add(button1, button2, button3)
+	return contacts_keyboard
