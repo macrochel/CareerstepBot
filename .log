@@ -1,0 +1,16 @@
+INFO 2023-07-19 15:23:16 (59) 	 /Users/ayan/Documents/careerstep_bot/bot.py F<module> L28 - Bot started
+WARNING 2023-07-19 15:23:39 (22923) 	 /Users/ayan/Documents/careerstep_bot/bot.py F<module> L78 - Bot stopped
+WARNING 2023-07-19 15:35:37 bot.py line 77 - Bot status: stopped
+INFO 2023-07-19 15:35:45 bot.py line 29 - Bot status: working
+INFO 2023-07-19 15:35:45 bot.py line 31 - Bot status: successfully connected to MongoDB
+WARNING 2023-07-19 15:35:51 bot.py line 83 - Bot status: stopped
+INFO 2023-07-19 15:36:06 bot.py line 29 - Bot status: working
+INFO 2023-07-19 15:36:07 bot.py line 31 - Bot status: successfully connected to MongoDB
+WARNING 2023-07-19 15:36:38 bot.py line 83 - Bot status: stopped
+INFO 2023-07-19 15:36:41 line 29 - Bot status: working
+INFO 2023-07-19 15:36:43 line 31 - Bot status: successfully connected to MongoDB
+INFO 2023-07-19 15:42:44 line 29 - Bot status: working
+INFO 2023-07-19 15:42:46 line 31 - Bot status: successfully connected to MongoDB
+WARNING 2023-07-19 15:43:30 line 81 - Bot status: stopped
+INFO 2023-07-19 15:43:32 - Bot status: working
+INFO 2023-07-19 15:43:34 - Bot status: successfully connected to MongoDB
