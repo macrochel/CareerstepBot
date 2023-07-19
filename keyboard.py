@@ -9,3 +9,9 @@ def menu():
 	menu_keyboard.add(button1)
 	menu_keyboard.add(button2, button3)
 	return menu_keyboard
+
+def contacts():
+	contacts_keyboard = types.InlineKeyboardMarkup(row_width=3, resize_keyboard=True)
+	button1 = types.InlineKeyboardButton('Алматы', callback_data='Almaty')
+	button2 = types.InlineKeyboardButton('Астана', callback_data='Astana')
+	button3 = types.InlineKeyboardButton('Шымкент', callback_data='Shymkent')
