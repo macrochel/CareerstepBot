@@ -1,4 +1,4 @@
-import re, phonenumbers
+import re
 
 def email(email):
    pat = "^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-z]{1,3}$"
@@ -7,5 +7,7 @@ def email(email):
    return False
 
 def phone(phone):
-    s = phonenumbers.parse(phone, None)
-    return phonenumbers.is_possible_number(s)
+    pat = re.compile(r"(\+\d{1,3})?\s?\(?\d{1,4}\)?[\s.-]?\d{3}[\s.-]?\d{4}")
+    if re.match(pat, phone):
+        return True
+    return False
