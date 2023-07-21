@@ -3,7 +3,6 @@ from reportlab.lib.pagesizes import A4
 from PIL import Image, ImageDraw
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from textwrap import wrap
 from os import remove
 
 def create(users, path):
@@ -23,7 +22,7 @@ def create(users, path):
             rounded_image.save(users["photo"]+".png")
         except:
             pass
-        pdfmetrics.registerFont(TTFont('TR', 'main/storage/font/calibri.ttf'))
+        pdfmetrics.registerFont(TTFont('TR', 'storage/font/calibri.ttf'))
         canvas = Canvas(path, pagesize=A4)
 
         canvas.setFont("TR", 26)
@@ -40,11 +39,11 @@ def create(users, path):
         canvas.setFont("TR", 16)
 
         canvas.drawString(33, 576.5, "Email: " + users["email"])
-        canvas.drawInlineImage("main/storage/pictures/mail.png", 20, 577, 10, 10)
+        canvas.drawInlineImage("storage/pictures/mail.png", 20, 577, 10, 10)
         canvas.drawString(33, 546.5, "Phone: " + users["phone"])
-        canvas.drawInlineImage("main/storage/pictures/phone.png", 20, 547, 10, 10)
+        canvas.drawInlineImage("storage/pictures/phone.png", 20, 547, 10, 10)
         canvas.drawString(33, 516.5, "City: " + users["city"])
-        canvas.drawInlineImage("main/storage/pictures/geo.png", 20, 517, 10, 10)
+        canvas.drawInlineImage("storage/pictures/geo.png", 20, 517, 10, 10)
         canvas.drawString(23, 486.5, "Goal: " + users["goal"])
 
         canvas.setFont("TR", 20)
