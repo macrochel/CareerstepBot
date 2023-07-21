@@ -16,16 +16,17 @@ def initUser(coll, message):
             "name": " ", 
             "city": " ", 
             "photo": " ", 
-            "goal": " ", 
             "phone": " ", 
             "email": " ", 
             "education": " ", 
             "expierence": " ", 
             "hardSkills": " ", 
             "softSkills": " ", 
-            "addInfo": " "
+            "addInfo": " ",
+            "goal": " "
         }
         return coll.insert_one(model)
+    return data
 
 def findUser(coll, message):
     data = coll.find_one({ "_id": message.chat.id })
