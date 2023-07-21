@@ -48,6 +48,8 @@ def command_message(message):
     if message.text == "/start":
         msg = "Привет, студент!) Я создан для того, чтобы помогать в составление резюме. Я помогу тебе сделать первый шаг в увлекательный мир профессионального развития и карьерного продвижения."
         sendCaptionPhoto(message.chat.id, 1, msg, menu())
+        x = db.initUser(coll, message)
+        logger.debug(x)
     elif message.text == "/stuck":
         goHome(message)
 
@@ -59,15 +61,13 @@ def text_message(message):
             msg = "Ты уже создал резюме, хочешь его обновить?"
             bot.send_message(message.chat.id, msg, reply_markup=firststep_inline())
         else:
-            logger.debug(db.initUser(coll, message))
-            db.initUser(coll, message)
             msg = "Напиши свое ФИО.\n\nЖелательно напиши свое ФИО так как в написано у тебя в государственных документах (удостоверение личности)."
             sendCaptionPhoto(message.chat.id, 2, msg, firststep())
             bot.register_next_step_handler(message, getName)
     elif message.text == "👤Мой профиль":
         bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAEJwSBkucJChvEVOe95t_Dl9OxPsGLeHwACQC8AAlxayEm6phyX7-7aXi8E")
         user = db.findUser(coll, message)
-        if user is not None:
+        if user != None:
             msg = f"📟id: {message.chat.id},\n👤ФИО: {user['name']}\n🌇Город: {user['city']}\n🎯Цель: {user['goal']}\n📱Номер телефона: {user['phone']}\n✉️Почта: {user['email']}\n🎓Образование: {user['education']}\n💡Опыт: {user['expierence']}\n🔧Hard skills: {user['hardSkills']}\n🗣Soft skills: {user['softSkills']}\n🗂Дополнительная информация: {user['addInfo']}"
             bot.send_message(message.chat.id, msg, reply_markup=profile())
         bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAEJwYBkugieMYaSy1dDSIJhKy2gZj7VsAACgSwAAs7w0Elawcv8qxYc3C8E")

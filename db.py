@@ -8,24 +8,23 @@ def init():
     return dbc, coll
 
 def initUser(coll, message):
-    data = coll.find({ "_id": message.chat.id })
-    if data == None:
-        model = {
-            "_id": message.chat.id, 
-            "userId": message.chat.id, 
-            "name": " ", 
-            "city": " ", 
-            "photo": " ", 
-            "phone": " ", 
-            "email": " ", 
-            "education": " ", 
-            "expierence": " ", 
-            "hardSkills": " ", 
-            "softSkills": " ", 
-            "addInfo": " ",
-            "goal": " "
-        }
-        x =  coll.insert_one(model)
+    model = {
+        "_id": message.chat.id, 
+        "userId": message.chat.id, 
+        "name": "", 
+        "city": "", 
+        "photo": "", 
+        "phone": "", 
+        "email": "", 
+        "education": "", 
+        "expierence": "", 
+        "hardSkills": "", 
+        "softSkills": "", 
+        "addInfo": "",
+        "goal": ""
+    }
+    x =  coll.insert_one(model)
+    return x.inserted_id
 
 def findUser(coll, message):
     data = coll.find_one({ "_id": message.chat.id })
