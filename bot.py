@@ -28,7 +28,7 @@ logFileFormatter = logging.Formatter(
     fmt=f"%(levelname)s %(asctime)s - %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
 )
-fileHandler = logging.FileHandler(filename="main/storage/loggs/.log")
+fileHandler = logging.FileHandler(filename="storage/loggs/.log")
 fileHandler.setFormatter(logFileFormatter)
 fileHandler.setLevel(level=logging.INFO)
 logger.addHandler(fileHandler)
@@ -103,7 +103,7 @@ def goHome(message):
         bot.send_message(message.chat.id, msg, reply_markup=menu())
 
 def sendCaptionPhoto(chatid, number, msg, keyboard):
-    path = "main/storage/pictures/" + str(number) + ".PNG"
+    path = "storage/pictures/" + str(number) + ".PNG"
     if not pather.exists(path):
         bot.send_message(chatid, "Фото не найдено")
         return
@@ -112,7 +112,7 @@ def sendCaptionPhoto(chatid, number, msg, keyboard):
 
 def generateResume(message):
     users = db.findUser(coll, message)
-    path = f"main/storage/pdf/{str(message.chat.id)}.pdf"
+    path = f"storage/pdf/{str(message.chat.id)}.pdf"
     pdf.create(users, path)
     sendResume(message, path)
     try:
@@ -157,10 +157,10 @@ def getPhoto(message):
         try:
             file_info = bot.get_file(message.photo[len(message.photo) - 1].file_id)
             downloaded_file = bot.download_file(file_info.file_path)
-            src = "main/storage/pictures/users/" + message.photo[1].file_id + ".jpg"
+            src = "storage/pictures/users/" + message.photo[1].file_id
             with open(src, "wb") as new_file:
                 new_file.write(downloaded_file)
-            db.uploadPhoto(coll, "main/storage/pictures/users/" + message.photo[1].file_id, message)
+            db.uploadPhoto(coll, "storage/pictures/users/" + message.photo[1].file_id, message)
             sendCaptionPhoto(message.chat.id, 8, msg, skipstep())
             bot.register_next_step_handler(message, getGoal)
         except Exception as e:

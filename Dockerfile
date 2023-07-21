@@ -1,11 +1,12 @@
 FROM python:3.11
 
-COPY main/storage/dependencies/requirements.txt /app/main/storage/dependencies/requirements.txt
-WORKDIR /app  
+WORKDIR /app
 
+COPY requirements.txt .
 RUN pip3 install --upgrade pip
-RUN pip3 install --no-cache-dir -r ./main/storage/dependencies/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . /app
+COPY bot.py .
+COPY watchdog_reload.py .
 
-CMD python3 /app/main/bot.py
+CMD ["python", "watchdog_reload.py"]
