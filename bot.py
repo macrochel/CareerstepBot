@@ -59,6 +59,7 @@ def text_message(message):
             msg = "Ты уже создал резюме, хочешь его обновить?"
             bot.send_message(message.chat.id, msg, reply_markup=firststep_inline())
         else:
+            logger.debug(db.initUser(coll, message))
             db.initUser(coll, message)
             msg = "Напиши свое ФИО.\n\nЖелательно напиши свое ФИО так как в написано у тебя в государственных документах (удостоверение личности)."
             sendCaptionPhoto(message.chat.id, 2, msg, firststep())
