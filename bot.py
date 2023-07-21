@@ -57,7 +57,7 @@ def command_message(message):
 @bot.message_handler(content_types=["text"])
 def text_message(message):
     if message.text == "📄Создать резюме":
-        if db.findUser(coll, message) != None:
+        if db.findUser(coll, message)['addInfo'] != None:
             msg = "Ты уже создал резюме, хочешь его обновить?"
             bot.send_message(message.chat.id, msg, reply_markup=firststep_inline())
         else:
