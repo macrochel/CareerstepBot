@@ -66,9 +66,11 @@ def text_message(message):
     elif message.text == "👤Мой профиль":
         bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAEJwSBkucJChvEVOe95t_Dl9OxPsGLeHwACQC8AAlxayEm6phyX7-7aXi8E")
         user = db.findUser(coll, message)
-        msg = f"📟id: {message.chat.id},\n👤ФИО: {user['name']}\n🌇Город: {user['city']}\n🎯Цель: {user['goal']}\n📱Номер телефона: {user['phone']}\n✉️Почта: {user['email']}\n🎓Образование: {user['education']}\n💡Опыт: {user['expierence']}\n🔧Hard skills: {user['hardSkills']}\n🗣Soft skills: {user['softSkills']}\n🗂Дополнительная информация: {user['addInfo']}"
-        bot.send_message(message.chat.id, msg, reply_markup=profile())
+        if user is not None:
+            msg = f"📟id: {message.chat.id},\n👤ФИО: {user['name']}\n🌇Город: {user['city']}\n🎯Цель: {user['goal']}\n📱Номер телефона: {user['phone']}\n✉️Почта: {user['email']}\n🎓Образование: {user['education']}\n💡Опыт: {user['expierence']}\n🔧Hard skills: {user['hardSkills']}\n🗣Soft skills: {user['softSkills']}\n🗂Дополнительная информация: {user['addInfo']}"
+            bot.send_message(message.chat.id, msg, reply_markup=profile())
         bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAEJwYBkugieMYaSy1dDSIJhKy2gZj7VsAACgSwAAs7w0Elawcv8qxYc3C8E")
+        
     elif message.text == "☎️Контакты КЦ":
         msg = "Контакты карьерного центра здесь вы можете обратиться в нужный карьерный центр. Для начала выберите филиал."
         sendCaptionPhoto(message.chat.id, 3, msg, contacts())
