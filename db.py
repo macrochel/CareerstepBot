@@ -1,6 +1,6 @@
 from decouple import config
 from pymongo.mongo_client import MongoClient
-client = MongoClient(config("ATLAS"))
+client = MongoClient(config("VPS"))
 
 def init():
     dbc = client["careerBot"]
