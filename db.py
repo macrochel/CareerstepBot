@@ -25,7 +25,7 @@ def initUser(coll, message):
             "softSkills": " ", 
             "addInfo": " "
         }
-    return coll.insert_one(model)
+        return coll.insert_one(model)
 
 def findUser(coll, message):
     data = coll.find_one({ "_id": message.chat.id })
