@@ -57,7 +57,7 @@ def command_message(message):
 @bot.message_handler(content_types=["text"])
 def text_message(message):
     if message.text == "📄Создать резюме":
-        if db.findUser(coll, message)["addInfo"] != None:
+        if db.findUser(coll, message)["addInfo"] != "":
             msg = "Ты уже создал резюме, хочешь его обновить?"
             bot.send_message(message.chat.id, msg, reply_markup=firststep_inline())
         else:
@@ -66,10 +66,8 @@ def text_message(message):
             bot.register_next_step_handler(message, getName)
     elif message.text == "👤Мой профиль":
         bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAEJwSBkucJChvEVOe95t_Dl9OxPsGLeHwACQC8AAlxayEm6phyX7-7aXi8E")
-        user = db.findUser(coll, message)
-        if user != None:
-            msg = f"📟id: {message.chat.id},\n👤ФИО: {user['name']}\n🌇Город: {user['city']}\n🎯Цель: {user['goal']}\n📱Номер телефона: {user['phone']}\n✉️Почта: {user['email']}\n🎓Образование: {user['education']}\n💡Опыт: {user['expierence']}\n🔧Hard skills: {user['hardSkills']}\n🗣Soft skills: {user['softSkills']}\n🗂Дополнительная информация: {user['addInfo']}"
-            bot.send_message(message.chat.id, msg, reply_markup=profile())
+        msg = f"📟id: {message.chat.id},\n👤ФИО: {user['name']}\n🌇Город: {user['city']}\n🎯Цель: {user['goal']}\n📱Номер телефона: {user['phone']}\n✉️Почта: {user['email']}\n🎓Образование: {user['education']}\n💡Опыт: {user['expierence']}\n🔧Hard skills: {user['hardSkills']}\n🗣Soft skills: {user['softSkills']}\n🗂Дополнительная информация: {user['addInfo']}"
+        bot.send_message(message.chat.id, msg, reply_markup=profile())
         bot.send_sticker(message.chat.id, "CAACAgIAAxkBAAEJwYBkugieMYaSy1dDSIJhKy2gZj7VsAACgSwAAs7w0Elawcv8qxYc3C8E")
         
     elif message.text == "☎️Контакты КЦ":
