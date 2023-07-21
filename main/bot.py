@@ -1,4 +1,4 @@
-import telebot, logging, asyncio, db
+import telebot, logging, db
 from keyboard import firststep, firststep_inline, nextstep, skipstep, noexpirience, menu, contacts, profile
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.pagesizes import A4
@@ -340,19 +340,13 @@ def getAddInfo(message):
         msg = "Приступаю к генерации резюме!"
         db.addCollumn(coll, "addInfo", message)
         bot.send_message(message.chat.id, msg, reply_markup=menu())
+        generateResume(message)
     elif message.text in filterList:
         goHome(message)
     elif message.text == "⬅️Вернуться на прошлый шаг":
         msg = "Навыки Soft skills\n\nКоммуникабельность, ответственность, уверенный пользователь ПК…\nЕсли ваш опыт не доказывает всех этих качеств – не пишите.\n\nЛучше указывайте soft skills. Например:\n- Навык ведения тренингов.\n- Навык управления несколькими проектами.\n- Высокий эмоциональный интеллект.\n- Знание иностранного языка и т.п.\n\nА если вам хочется рассказать о своих личных качествах, то упомяните их в разделе «Дополнительные сведения»."
         sendCaptionPhoto(message.chat.id, 14, msg, nextstep())
         bot.register_next_step_handler(message, getSoftSkills)
-
-#async mailing
-async def working(userids, msg):
-    while True:
-        for userid in userids:
-            await bot.send_message(userid, msg)
-        await asyncio.sleep(15)
 
 #polling
 bot.polling(none_stop = True)
