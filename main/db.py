@@ -28,12 +28,17 @@ def initUser(coll, message):
         coll.insert_one(model)
 
 def findUser(coll, message):
-    data = coll.find_one({ "_id": message.from_user.id })
+    data = coll.find_one({ "_id": message.chat.id })
     return data
 
 def addCollumn(coll, name, message):
     id = {"_id": message.from_user.id}
     data = {"$set": {name: message.text}}
+    coll.update_one(id, data)
+
+def addCollumnEmpty(coll, name, message):
+    id = {"_id": message.from_user.id}
+    data = {"$set": {name: "Nothing"}}
     coll.update_one(id, data)
 
 def uploadPhoto(coll, src, message):
