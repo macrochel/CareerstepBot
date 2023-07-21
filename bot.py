@@ -57,7 +57,7 @@ def command_message(message):
 @bot.message_handler(content_types=["text"])
 def text_message(message):
     if message.text == "📄Создать резюме":
-        if db.findUser(coll, message)['addInfo'] != None:
+        if db.findUser(coll, message)["addInfo"] != None:
             msg = "Ты уже создал резюме, хочешь его обновить?"
             bot.send_message(message.chat.id, msg, reply_markup=firststep_inline())
         else:
@@ -96,7 +96,8 @@ def callback_query(call):
         msg = "☀️Караганда\n\nКанал карьерного центра:\nhttps://t.me/+M-FBa3ByjddmYTIy\n\nТелеграм: @careerstep_krg\n\nТелефон/WhatsApp: +7 708 651 47 62"
         sendCaptionPhoto(call.message.chat.id, 6, msg, menu())
     elif call.data == "create_resume":
-        generateResume(call.message)
+        if db.findUser(coll, call.message)["AddInfo"] != None:
+            generateResume(call.message)
 
 #functions 
 def goHome(message):
