@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  build:
+    build:
+      context: .  
+      dockerfile: Dockerfile  
+    environment:
+      - API_KEY=6281219253:AAGX2omjP_rhPAOkIms-qRl2R7OHmaOA6HQ
+      - DB=mongodb://root:mongo123@mongo:27017
+    volumes:
+      - .:/app  
+    depends_on:
+      - mongodb  
+    links:
+      - mongodb:mongo  
+
+  mongodb:
+    image: mongo:latest
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=mongo123
+    volumes:
+      - mongodb_data:/data/db  
+
+volumes:
+  mongodb_data: 
