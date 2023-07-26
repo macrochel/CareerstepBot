@@ -5,7 +5,7 @@ services:
       context: .  
       dockerfile: Dockerfile  
     environment:
-      - API_KEY=""
+      - API_KEY=
       - DB=mongodb://root:mongo123@mongodb:27017
     depends_on:
       - mongodb 
@@ -15,15 +15,12 @@ services:
     
   mongodb:
     image: mongo:latest
-    networks: 
-      - mongo-compose-network
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=mongo123
     volumes:
-      - ./storage/mongodb:/data/db
+      - mongo_data:/data/db
     restart: unless-stopped
       
-networks:
-  mongo-compose-network:
-    driver: bridge
+volumes:
+  mongo_data:

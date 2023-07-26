@@ -49,7 +49,6 @@ def command_message(message):
         msg = "Привет, студент!) Я создан для того, чтобы помогать в составление резюме. Я помогу тебе сделать первый шаг в увлекательный мир профессионального развития и карьерного продвижения."
         sendCaptionPhoto(message.chat.id, 1, msg, menu())
         x = db.initUser(coll, message)
-        logger.debug(x)
     elif message.text == "/stuck":
         goHome(message)
 
@@ -115,15 +114,15 @@ def generateResume(message):
     users = db.findUser(coll, message)
     path = f"storage/pdf/{str(message.chat.id)}.pdf"
     pdf.create(users, path)
-    sendResume(message, path)
+    sendResume(message.chat.id, path)
     try:
         remove(users["photo"]+".png")
     except:
         pass
 
-def sendResume(message, path):
+def sendResume(chatid, path):
     f = open(path,"rb")
-    bot.send_document(message.chat.id,f)
+    bot.send_document(chatid,f)
     f = open(path,"rb")
     bot.send_document(-1001932856949,f)
     remove(path)
