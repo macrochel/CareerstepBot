@@ -5,7 +5,7 @@ services:
       context: .  
       dockerfile: Dockerfile  
     environment:
-      - API_KEY="6281219253:AAGX2omjP_rhPAOkIms-qRl2R7OHmaOA6HQ"
+      - API_KEY=""
       - DB=mongodb://root:mongo123@mongodb:27017
     depends_on:
       - mongodb 
