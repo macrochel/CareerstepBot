@@ -1,26 +1,29 @@
 version: '3.8'
 services:
-  build:
+  telegram:
     build:
       context: .  
       dockerfile: Dockerfile  
     environment:
-      - API_KEY=6281219253:AAGX2omjP_rhPAOkIms-qRl2R7OHmaOA6HQ
-      - DB=mongodb://root:mongo123@mongo:27017
+      - API_KEY=${TELEGRAM_API_TOKEN}
+      - DB=mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:27017
+    depends_on:
+      - mongodb 
     volumes:
       - .:/app  
-    depends_on:
-      - mongodb  
-    links:
-      - mongodb:mongo  
-
+    restart: unless-stopped
+    
   mongodb:
     image: mongo:latest
+    networks: 
+      - mongo-compose-network
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=mongo123
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
     volumes:
-      - mongodb_data:/data/db  
-
-volumes:
-  mongodb_data: 
+      - ./storage/mongodb:/data/db
+    restart: unless-stopped
+      
+networks:
+  mongo-compose-network:
+    driver: bridge
