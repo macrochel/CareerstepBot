@@ -5,8 +5,8 @@ services:
       context: .  
       dockerfile: Dockerfile  
     environment:
-      - API_KEY=${TELEGRAM_API_TOKEN}
-      - DB=mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:27017
+      - API_KEY="6281219253:AAGX2omjP_rhPAOkIms-qRl2R7OHmaOA6HQ"
+      - DB=mongodb://root:mongo123@mongodb:27017
     depends_on:
       - mongodb 
     volumes:
@@ -18,8 +18,8 @@ services:
     networks: 
       - mongo-compose-network
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
-      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=mongo123
     volumes:
       - ./storage/mongodb:/data/db
     restart: unless-stopped
